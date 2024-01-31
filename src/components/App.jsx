@@ -4,11 +4,11 @@ import { fetchContacts, getCurrentUser } from '../redux/contactsApi';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom'
 
-import Register from './Register';t
+import Register from './Register';
 import Login from './Login';
-import Navigation from './Navigation';
+import Navigation from './Navigation'; 
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -21,10 +21,10 @@ export const App = () => {
   return (
     <div>
       <Navigation />
-      <Switch>
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        <Route path="/contacts">
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contacts" element={
           <div>
             <h1>Phonebook</h1>
             <ContactForm />
@@ -33,9 +33,10 @@ export const App = () => {
             <Filter />
             <ContactList />
           </div>
-        </Route>
-      </Switch>
+        } />
+      </Routes>
     </div>
   );
 };
+
 export default App;
