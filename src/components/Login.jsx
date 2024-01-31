@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/contactsApi';
+import { loginUser } from '../redux/authApi';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setLoginData({
+      ...loginData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
-    setEmail('');
-    setPassword('');
+    dispatch(loginUser(loginData));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Email:</label>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <label>Password:</label>
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+      <label>Email: <input type="email" name="email" onChange={handleChange} /></label>
+      <label>Password: <input type="password" name="password" onChange={handleChange} /></label>
       <button type="submit">Login</button>
     </form>
   );

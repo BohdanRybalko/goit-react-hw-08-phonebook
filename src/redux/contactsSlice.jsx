@@ -1,3 +1,4 @@
+
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './contactsApi';
 
@@ -39,4 +40,3 @@ const contactsSlice = createSlice({
 
 export const { setFilter } = contactsSlice.actions;
 export default contactsSlice.reducer;
-
