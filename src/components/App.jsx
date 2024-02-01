@@ -1,26 +1,56 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchContacts } from '../redux/contactsApi'; 
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import Filter from './Filter';
 
-export const App = () => {
-  const dispatch = useDispatch();
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Link, Route, Navigate } from 'react-router-dom';
+import Registration from '../pages/Registration';
+import Login from '../pages/Login';
+import Contacts from '../pages/Contacts';
+import PrivateRoute from '../routes/PrivateRoute';
+import UserMenu from './UserMenu';
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
 
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList />
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/register">Реєстрація</Link>
+            </li>
+            <li>
+              <Link to="/login">Логін</Link>
+            </li>
+            {isAuthenticated && (
+              <li>
+                <Link to="/contacts">Контакти</Link>
+              </li>
+            )}
+          </ul>
+          {isAuthenticated && <UserMenu onLogout={handleLogout} />}
+        </nav>
+        <Route path="/register" element={<Registration />} />
+        <Route
+          path="/login"
+          element={
+            isAuthenticated ? <Navigate to="/contacts" /> : <Login onLogin={handleLogin} />
+          }
+        />
+        <PrivateRoute
+          path="/contacts"
+          element={<Contacts />}
+          isAuthenticated={isAuthenticated}
+        />
+      </div>
+    </Router>
   );
 };
 
