@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { addContact } from '../redux/contactsApi';
 
@@ -9,21 +8,9 @@ const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-
-  const user = useSelector((state) => state.auth.user);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-
-    if (!user) {
-     
-      console.log('Please log in or register.');
-      return;
-    }
-
-
-    dispatch(addContact({ id: nanoid(), name, number, userId: user.id }));
+    dispatch(addContact({ id: nanoid(), name, number }));
     setName('');
     setNumber('');
   };

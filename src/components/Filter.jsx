@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../redux/contactsSlice';
@@ -12,14 +11,12 @@ const Filter = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={filter}
-        onChange={(e) => filterChangeHandler(e.target.value)}
-        placeholder="Search contacts"
-      />
-    </div>
+    <input
+      type="text"
+      value={filter}
+      onChange={(e) => filterChangeHandler(e.target.value)}
+      placeholder="Search contacts"
+    />
   );
 };
 
