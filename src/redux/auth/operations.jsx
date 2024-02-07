@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://65b4f3d841db5efd28671d26.mockapi.io/contacts/contacts';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 
 const setAuthHeader = token => {
