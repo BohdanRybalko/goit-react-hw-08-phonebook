@@ -1,6 +1,8 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import ContactForm from '../contact/ContactForm';
+import ContactList from '../contact/ContactList';
+import Filter from '../contact/Filter';
 
 const Contacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -56,28 +58,15 @@ const Contacts = () => {
   return (
     <div>
       <h2>Contacts</h2>
-      <ul>
-        {contacts.map((contact) => (
-          <li key={contact.id}>
-            {contact.name}: {contact.number}
-            <button onClick={() => handleDeleteContact(contact.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <h3>Add New Contact</h3>
-      <form onSubmit={handleAddContact}>
-        <label>
-          Name:
-          <input type="text" name="name" value={newContact.name} onChange={handleChange} required />
-        </label>
-        <br />
-        <label>
-          Number:
-          <input type="tel" name="number" value={newContact.number} onChange={handleChange} required />
-        </label>
-        <br />
-        <button type="submit">Add Contact</button>
-      </form>
+      <Filter />
+      <ContactForm
+        name={newContact.name}
+        number={newContact.number}
+        onAddContact={handleAddContact}
+        onNameChange={(e) => handleChange(e, 'name')}
+        onNumberChange={(e) => handleChange(e, 'number')}
+      />
+      <ContactList contacts={contacts} onDeleteContact={handleDeleteContact} />
     </div>
   );
 };
