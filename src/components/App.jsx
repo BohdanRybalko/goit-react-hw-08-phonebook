@@ -5,22 +5,22 @@ import Login from '../pages/Login';
 import Contacts from '../pages/Contacts';
 import PrivateRoute from '../routes/PrivateRoute';
 import { RestrictedRoute } from '../routes/RestrictedRoute';
-import UserMenu from './UserMenu';
+import { Layout } from './Layout';
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<UserMenu />}>
+      <Route path="/" element={<Layout />}>
         <Route
-          path="/Registration"
+          path="/registration"
           element={<RestrictedRoute redirectTo="/" component={<Registration />} />}
          />
         <Route
-          path="/Contacts"
+          path="/contacts"
           element={<RestrictedRoute redirectTo="/" component={<Contacts />} />}
         />
         <Route
-          path="/Login"
+          path="/login"
           element={<PrivateRoute redirectTo="/login" component={<Login />} />}
         />
       </Route>

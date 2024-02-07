@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import UserMenu from './UserMenu';
+import { UserMenu }  from './UserMenu';
 
 const Navigation = ({ isAuthenticated, onLogout }) => {
   return (
