@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Registration from '../pages/Registration';
 import Login from '../pages/Login';
 import Contacts from '../pages/Contacts';
-import PrivateRoute from '../routes/PrivateRoute';
+import { PrivateRoute } from '../routes/PrivateRoute';
 import { RestrictedRoute } from '../routes/RestrictedRoute';
 import { Layout } from './Layout';
 
@@ -17,11 +17,11 @@ const App = () => {
          />
         <Route
           path="/сontacts"
-          element={<RestrictedRoute redirectTo="/" component={<Contacts />} />}
+          element={<PrivateRoute redirectTo="/" component={<Contacts />} />}
         />
         <Route
           path="/login"
-          element={<PrivateRoute redirectTo="/login" component={<Login />} />}
+          element={<RestrictedRoute redirectTo="/login" component={<Login />} />}
         />
       </Route>
     </Routes>
